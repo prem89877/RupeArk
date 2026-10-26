@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Animation.AppCompat.Tooltip" parent="@style/Base.Animation.AppCompat.Tooltip" />
+    <style name="Base.Animation.AppCompat.Tooltip" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/abc_tooltip_enter</item>
+        <item name="android:windowExitAnimation">@anim/abc_tooltip_exit</item>
+    </style>
+    <style name="Base.TextAppearance.AppCompat" parent="@android:style/TextAppearance.Material" />
+    <style name="DialogWindowTheme">
+        <item name="android:windowClipToOutline">false</item>
+    </style>
+    <style name="FloatingDialogWindowTheme">
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowClipToOutline">false</item>
+    </style>
+    <style name="RtlOverlay.Widget.AppCompat.Search.DropDown" parent="@android:style/Widget">
+        <item name="android:paddingStart">@dimen/abc_dropdownitem_text_padding_left</item>
+        <item name="android:paddingEnd">4.0dip</item>
+    </style>
+    <style name="RtlOverlay.Widget.AppCompat.Search.DropDown.Icon1" parent="@android:style/Widget">
+        <item name="android:layout_alignParentStart">true</item>
+    </style>
+    <style name="RtlOverlay.Widget.AppCompat.Search.DropDown.Icon2" parent="@android:style/Widget">
+        <item name="android:layout_toStartOf">@id/edit_query</item>
+    </style>
+    <style name="RtlOverlay.Widget.AppCompat.Search.DropDown.Query" parent="@android:style/Widget">
+        <item name="android:layout_alignParentEnd">true</item>
+    </style>
+    <style name="RtlOverlay.Widget.AppCompat.SearchView.MagIcon" parent="@android:style/Widget">
+        <item name="android:layout_marginStart">@dimen/abc_dropdownitem_text_padding_left</item>
+    </style>
+    <style name="TextAppearance.AppCompat" parent="@style/Base.TextAppearance.AppCompat" />
+    <style name="TextAppearance.AppCompat.Tooltip" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="Theme.RupeArk" parent="@android:style/Theme.Material.Light.NoActionBar" />
+</resources>

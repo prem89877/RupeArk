@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    android:compileSdkVersion="37"
+    android:compileSdkVersionCodename="17"
+    android:requiredSplitTypes="base__abi"
+    android:splitTypes=""
+    package="com.orbentara.mobile.historykeeper"
+    platformBuildVersionCode="37"
+    platformBuildVersionName="17"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <queries>
+        <intent>
+            <action
+                android:name="android.intent.action.MAIN" />
+            <category
+                android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+    <!-- Allows the app to create network sockets and use custom network protocols. The browser and other applications provide means to send data to the internet, so this permission is not required to send data to the internet. -->
+    <uses-permission
+        android:name="android.permission.INTERNET" />
+    <!-- Allows the app to view information about network connections such as which networks exist and are connected. -->
+    <uses-permission
+        android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- This app can read your call history. -->
+    <uses-permission
+        android:name="android.permission.READ_CALL_LOG" />
+    <!-- Allows the app to modify your phone's call log, including data about incoming and outgoing calls. Malicious apps may use this to erase or modify your call log. -->
+    <uses-permission
+        android:name="android.permission.WRITE_CALL_LOG" />
+    <!-- This app can take pictures and record videos using the camera while the app is in use. -->
+    <uses-permission
+        android:name="android.permission.CAMERA" />
+    <!-- This app can get your approximate location from Location Services while the app is in use. Location Services for your device must be turned on for the app to get location. -->
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Allows a publisher app to access a valid advertising ID directly or indirectly. -->
+    <uses-permission
+        android:name="com.google.android.gms.permission.AD_ID" />
+    <!-- Allows the app to prevent the phone from going to sleep. -->
+    <uses-permission
+        android:name="android.permission.WAKE_LOCK" />
+    <!-- Allows the app to retrieve its install referrer information. -->
+    <uses-permission
+        android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+    <!-- Allows an application to access AdServices Attribution APIs. -->
+    <uses-permission
+        android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
+    <!-- Allows an application to access AdId API. -->
+    <uses-permission
+        android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
+    <!-- Allows the app to show notifications -->
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Allows apps to accept cloud-to-device messages sent by the app's service. Using this service will incur data usage. Malicious apps could cause excess data usage. -->
+    <uses-permission
+        android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!-- Allows an application to access AdServices Custom Audience API. -->
+    <uses-permission
+        android:name="android.permission.ACCESS_ADSERVICES_CUSTOM_AUDIENCE" />
+    <!-- Allows an application to access AdServices Topics API. -->
+    <uses-permission
+        android:name="android.permission.ACCESS_ADSERVICES_TOPICS" />
+    <permission
+        android:name="com.orbentara.mobile.historykeeper.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+    <uses-permission
+        android:name="com.orbentara.mobile.historykeeper.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <application
+        android:theme="@style/Theme.RupeArk"
+        android:label="@string/app_name"
+        android:icon="@drawable/welcome_logo"
+        android:name="com.orbentara.mobile.historykeeper.RupeArkApp"
+        android:allowBackup="false"
+        android:supportsRtl="true"
+        android:extractNativeLibs="false"
+        android:fullBackupContent="@xml/backup_rules"
+        android:usesCleartextTraffic="false"
+        android:roundIcon="@drawable/welcome_logo"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:dataExtractionRules="@xml/data_extraction_rules">
+        <property
+            android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY"
+            android:value="true" />
+        <activity
+            android:theme="@style/Theme.RupeArk"
+            android:label="@string/app_name"
+            android:name="com.orbentara.mobile.historykeeper.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MAIN" />
+                <category
+                    android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:authorities="com.orbentara.mobile.historykeeper.fileprovider"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <service
+            android:name="androidx.camera.core.impl.MetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+        </service>
+        <receiver
+            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name="com.google.firebase.components.ComponentDiscoveryService"
+            android:exported="false"
+            android:directBootAware="true">
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.messaging.ktx.FirebaseMessagingLegacyRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.crashlytics.FirebaseCrashlyticsKtxRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.sessions.FirebaseSessionsRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+        </service>
+        <receiver
+            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND"
+            android:exported="true">
+            <intent-filter>
+                <action
+                    android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+            <meta-data
+                android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED"
+                android:value="true" />
+        </receiver>
+        <service
+            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+            android:exported="false"
+            android:directBootAware="true">
+            <intent-filter
+                android:priority="-500">
+                <action
+                    android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <activity
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false" />
+        <service
+            android:name="androidx.room.MultiInstanceInvalidationService"
+            android:exported="false"
+            android:directBootAware="true" />
+        <receiver
+            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action
+                    android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.facebook.AuthenticationTokenManager$CurrentAuthenticationTokenChangedBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action
+                    android:name="com.facebook.sdk.ACTION_CURRENT_AUTHENTICATION_TOKEN_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <uses-library
+            android:name="androidx.window.extensions"
+            android:required="false" />
+        <uses-library
+            android:name="androidx.window.sidecar"
+            android:required="false" />
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:exported="false"
+            android:authorities="com.orbentara.mobile.historykeeper.androidx-startup">
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="okhttp3.internal.platform.PlatformInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+                android:value="androidx.startup" />
+        </provider>
+        <service
+            android:name="com.google.firebase.sessions.SessionLifecycleService"
+            android:enabled="false"
+            android:exported="false" />
+        <provider
+            android:name="com.google.firebase.provider.FirebaseInitProvider"
+            android:exported="false"
+            android:authorities="com.orbentara.mobile.historykeeper.firebaseinitprovider"
+            android:initOrder="100"
+            android:directBootAware="true" />
+        <uses-library
+            android:name="android.ext.adservices"
+            android:required="false" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <service
+            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+            android:exported="false">
+            <meta-data
+                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+                android:value="cct" />
+        </service>
+        <receiver
+            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+            android:permission="android.permission.DUMP"
+            android:enabled="true"
+            android:exported="true"
+            android:directBootAware="false">
+            <intent-filter>
+                <action
+                    android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="androidx.profileinstaller.action.SKIP_FILE" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false" />
+        <receiver
+            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+            android:exported="false" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.oxmtza.RgglhaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.oxmtza.PsrmubActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.oxmtza.PuzficActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.oxmtza.SekwjdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.oxmtza.IturjeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.qksieb.VrqceaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.qksieb.FfwicbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.qksieb.WqfvucActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.qksieb.GawdpdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.qksieb.DismjeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.qbohxc.PaijsaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.qbohxc.FpspwbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.qbohxc.PzledcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.qbohxc.FgobedActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.qbohxc.CqmxceActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.dcpecd.VeaqiaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.dcpecd.SbdbcbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.dcpecd.LqhnjcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.dcpecd.YqktndActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.dcpecd.AiajreActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ecicye.YvchxaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ecicye.MtfttbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ecicye.OpjljcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ecicye.NtoyadActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ecicye.MehdveActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xjvatf.IfjvxaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xjvatf.IhbxnbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xjvatf.YeaxkcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xjvatf.BxxgvdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xjvatf.ItteieActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.offnrg.GtmcsaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.offnrg.UanrlbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.offnrg.EjnvkcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.offnrg.HopozdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.offnrg.ItjiceActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ribrph.SypaoaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ribrph.JbcocbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ribrph.QuotscActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ribrph.EgwhrdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ribrph.OykjmeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.owongi.YqmuraActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.owongi.TuyqabActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.owongi.NpqqacActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.owongi.PjgdpdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.owongi.EvrhheActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.eommjj.FnzjiaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.eommjj.DuelebActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.eommjj.FedatcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.eommjj.VrapadActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.eommjj.SaedweActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.zvingk.LymdhaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.zvingk.WkglbbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.zvingk.QkiaucActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.zvingk.BsygcdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.zvingk.TeqhceActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.zxnhyl.HtgpgaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.zxnhyl.QxfbtbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.zxnhyl.JtylqcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.zxnhyl.JprzcdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.zxnhyl.WrnxxeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.bqdmym.AznodaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.bqdmym.HbqihbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.bqdmym.UklfmcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.bqdmym.HpmfhdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.bqdmym.OypvoeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.rskoan.OqaxuaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.rskoan.FiewjbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.rskoan.EgrlvcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.rskoan.OkncudActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.rskoan.GlnpheActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wwkzno.PloxeaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wwkzno.MyagibActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wwkzno.TgyuvcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wwkzno.RgrjgdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wwkzno.HiooheActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.gwsnsp.AoqvkaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.gwsnsp.QorlebActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.gwsnsp.CpzkrcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.gwsnsp.AcvrddActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.gwsnsp.MpzvqeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ariavq.VyrhtaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ariavq.SdhagbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ariavq.FvcvvcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ariavq.VwzfadActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ariavq.EidaieActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.mocqbr.XorhlaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.mocqbr.QrjuabActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.mocqbr.JpdgvcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.mocqbr.BittqdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.mocqbr.YcbzjeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.kuhxrs.JnidoaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.kuhxrs.SjzstbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.kuhxrs.AfufscActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.kuhxrs.DluiydActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.kuhxrs.ZpivheActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xlkbnt.QrxqoaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xlkbnt.MjxalbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xlkbnt.PxgdycActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xlkbnt.EynwjdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xlkbnt.JkrdpeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xvplbu.LjnvuaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xvplbu.YidzhbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xvplbu.UwlyccActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xvplbu.MranydActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.xvplbu.JtuwbeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.iieqov.LfkmraActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.iieqov.HuqxcbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.iieqov.VvqticActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.iieqov.BgtqadActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.iieqov.LmxbweActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.swpstw.CcuttaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.swpstw.BrrndbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.swpstw.QoydscActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.swpstw.NhpjzdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.swpstw.IytiueActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ncoimx.KkxoeaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ncoimx.QrvzubActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ncoimx.MkrhfcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ncoimx.SvjyddActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ncoimx.LuqbleActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ulsdmy.CsyolaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ulsdmy.NecdebActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ulsdmy.NyybscActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ulsdmy.JngpkdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ulsdmy.KpggreActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wsjgyz.QkspraActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wsjgyz.BfppabActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wsjgyz.QpzugcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wsjgyz.WyuptdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wsjgyz.KaowfeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.vqxqrab.TfmzwaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.vqxqrab.GbzotbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.vqxqrab.PuybycActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.vqxqrab.DbrimdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.vqxqrab.LgmckeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wkdotbb.TepeoaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wkdotbb.DzyycbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wkdotbb.CbszjcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wkdotbb.TkwicdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wkdotbb.YexqkeActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ltlqacb.TgznkaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ltlqacb.QmtcnbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ltlqacb.UlxxdcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ltlqacb.LllowdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.ltlqacb.NiaeieActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wokgqdb.RqdspaActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wokgqdb.PnbaxbActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wokgqdb.XfekqcActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wokgqdb.YqzpvdActivity" />
+        <activity
+            android:name="com.orbentara.mobile.historykeeper.ui.other.wokgqdb.PftqoeActivity" />
+        <meta-data
+            android:name="com.android.vending.splits.required"
+            android:value="true" />
+        <meta-data
+            android:name="com.android.stamp.source"
+            android:value="https://play.google.com/store" />
+        <meta-data
+            android:name="com.android.stamp.type"
+            android:value="STAMP_TYPE_DISTRIBUTION_APK" />
+        <meta-data
+            android:name="com.android.vending.splits"
+            android:resource="@xml/splits0" />
+        <meta-data
+            android:name="com.android.vending.derived.apk.id"
+            android:value="4" />
+    </application>
+</manifest>
